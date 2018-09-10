@@ -6,6 +6,8 @@ select * from uf
 select * from regiao_uf
 
 
+--AVG Retorna a média dos valores em um grupo. Valores nulos são ignorados
+select AVG(populacao) from cidades
 
 --AVG MEDIA POR ESTADO
 
@@ -23,7 +25,7 @@ GROUP BY B.regiao
 ORDER BY 2 desc
 
 
---MIN Retorna o valor mï¿½nimo na expressï¿½o. Pode ser seguido pela clï¿½usula OVER
+--MIN Retorna o valor mínimo na expressão. Pode ser seguido pela cláusula OVER
 select MIN(populacao) from cidades
 
 --MIN  POR ESTADO
@@ -41,7 +43,7 @@ ON A.cod_uf=B.ID
 GROUP BY B.regiao
 ORDER BY 2
 
---MAX Retorna o valor mï¿½ximo na expressï¿½o
+--MAX Retorna o valor máximo na expressão
 select MAX(populacao) from cidades
 
 --MAX  POR ESTADO
@@ -60,8 +62,8 @@ ORDER BY 2
 
 
 
---SUM Retorna a soma de todos os valores ou somente os valores DISTINCT na expressï¿½o. 
---SUM pode ser usado exclusivamente com colunas numï¿½ricas.Valores nulos sï¿½o ignorados.
+--SUM Retorna a soma de todos os valores ou somente os valores DISTINCT na expressão. 
+--SUM pode ser usado exclusivamente com colunas numéricas.Valores nulos são ignorados.
 
 select SUM(populacao) from cidades
 --183989711
@@ -82,7 +84,7 @@ ON A.cod_uf=B.ID
 GROUP BY B.regiao
 ORDER BY 2
 
---COUNT Retorna o nï¿½mero de itens de um grupo
+--COUNT Retorna o número de itens de um grupo
 
 select COUNT(*) from cidades
 
@@ -107,7 +109,7 @@ ON A.cod_uf=B.ID
 GROUP BY B.regiao
 ORDER BY 2
 
---usando varias funï¿½oes de agregacao
+--usando varias funçoes de agregacao
 
 select avg(populacao)media_pop,
 	   min(populacao)minimo_pop,
@@ -142,18 +144,18 @@ ON A.cod_uf=B.ID
 GROUP BY B.regiao
 ORDER BY 2
 
---STDEV Retorna o desvio padrï¿½o estatï¿½stico de todos os valores da expressï¿½o especificada
+--STDEV Retorna o desvio padrão estatístico de todos os valores da expressão especificada
 
 select STDEV(populacao)  from cidades
 
---STDEVP Retorna o desvio padrï¿½o estatï¿½stico para a populaï¿½ï¿½o de todos os 
---valores na expressï¿½o especificada
+--STDEVP Retorna o desvio padrão estatístico para a população de todos os 
+--valores na expressão especificada
 
 select STDEVP(populacao)  from cidades
 
---GROUPING Indica se uma expressï¿½o de coluna especificada em uma lista 
---GROUP BY ï¿½ agregada ou nï¿½o. GROUPING retorna 1 para agregada ou 0 
---para nï¿½o agregada no conjunto de resultados.
+--GROUPING Indica se uma expressão de coluna especificada em uma lista 
+--GROUP BY é agregada ou não. GROUPING retorna 1 para agregada ou 0 
+--para não agregada no conjunto de resultados.
 
 select uf,sum(populacao) as populacao,
 GROUPING(uf) as grupo 
@@ -188,9 +190,9 @@ group by a.uf
 
 --GROUPING_ID
 /*
-ï¿½ uma funï¿½ï¿½o que calcula o nï¿½vel de agrupamento. 
+É uma função que calcula o nível de agrupamento. 
 GROUPING_ID pode ser usada apenas na lista SELECT <select>, 
-na clï¿½usula HAVING ou ORDER BY, quando GROUP BY for especificada.
+na cláusula HAVING ou ORDER BY, quando GROUP BY for especificada.
 */
 select b.regiao,a.uf,sum(a.populacao) populacao,
 GROUPING_ID(b.regiao,a.uf) as grupo 
@@ -201,15 +203,15 @@ group by rollup(b.regiao,a.uf)
 
 
 
---VAR Retorna a variï¿½ncia estatï¿½stica de todos os valores da expressï¿½o especificada
+--VAR Retorna a variância estatística de todos os valores da expressão especificada
 SELECT VAR(POPULACAO) FROM CIDADES
 
 SELECT UF,VAR(POPULACAO) FROM CIDADES
 GROUP BY UF
 
 
---VARP Retorna a variï¿½ncia estatï¿½stica para o preenchimento 
---de todos os valores da expressï¿½o especificada.
+--VARP Retorna a variância estatística para o preenchimento 
+--de todos os valores da expressão especificada.
 SELECT VARP(POPULACAO) FROM CIDADES
 
 SELECT UF,VARP(POPULACAO) FROM CIDADES
@@ -222,10 +224,10 @@ GROUP BY UF
 
 --exemplo com Grouping
 use AdventureWorks2014
-SELECTï¿½salesquota,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sum(salesytd)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'TotalSalesYTD',ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-Grouping(salesquota)ï¿½ASï¿½'Grouping'ï¿½
-from sales.salespersonï¿½
-GROUPï¿½ï¿½BYï¿½salesquotaï¿½WITHï¿½rollup;
+SELECT salesquota,        Sum(salesytd)        'TotalSalesYTD',        
+Grouping(salesquota) AS 'Grouping' 
+from sales.salesperson 
+GROUP  BY salesquota WITH rollup;
 
 
 

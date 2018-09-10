@@ -7,16 +7,16 @@ EXEC sp_grantdbaccess 'UsrTeste','UsrTeste'
 EXEC sp_revokedbaccess 'UsrTeste'
 
 
---Concedendo Acesso DE ATUALIZACAO PARA UsrTeste.
+--Concedendo Acesso DE ATUALIZACAO PARA UsrTeste.
 GRANT UPDATE ON FUNCIONARIOS TO UsrTeste; 
 
---Concedendo Acesso DE INSERT PARA UsrTeste.
+--Concedendo Acesso DE INSERT PARA UsrTeste.
 GRANT INSERT ON FUNCIONARIOS TO UsrTeste; 
 
---Concedendo Acesso DE Leitura PARA UsrTeste.
+--Concedendo Acesso DE Leitura PARA UsrTeste.
 GRANT SELECT ON FUNCIONARIOS TO UsrTeste;
 
---Concedendo Acesso DE DELETE PARA UsrTeste.
+--Concedendo Acesso DE DELETE PARA UsrTeste.
 GRANT DELETE ON FUNCIONARIOS TO UsrTeste;
 
 
